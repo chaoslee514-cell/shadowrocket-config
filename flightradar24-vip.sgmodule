@@ -1,15 +1,15 @@
-#!name=Flightradar24 VIP Unlock (优化版)
-#!desc=Flightradar24 Gold / SVIP 解锁 - 尝试解锁扩展历史、无广告等功能
-#!author=社区开源优化
+#!name=Flightradar24 Gold VIP Unlock (v3.0)
+#!desc=尝试解锁 Gold 会员功能（扩展历史、无广告等）。基于开源规则优化
+#!author=社区开源 + Grok 优化
 #!update=2026-06-17
-#!warning=解锁效果依赖App版本与服务器，随时可能失效。仅供学习测试，请优先合法订阅支持开发者。
+#!warning=服务器端验证严格，效果不保证永久有效。App 版本过新可能失效。请优先合法订阅。
 
 [Script]
-# 主解锁脚本（使用更稳定的引用来源）
-Flightradar24 = type=http-response,pattern=^https:\/\/mobile\.flightradar24\.com\/mobile\/(user-session|subscribe),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/garywah/Shadowrocket/main/module/ProCrack.module,timeout=60
+# 核心解锁规则（使用当前可用的引用）
+Flightradar24 = type=http-response,pattern=^https:\/\/mobile\.flightradar24\.com\/mobile\/(user-session|subscribe|account),requires-body=1,max-size=10240,script-path=https://raw.githubusercontent.com/garywah/Shadowrocket/main/module/Flightradar24.module,timeout=60
 
-# 补充响应处理（如果需要可自行添加自定义JS）
-# Flightradar24-Extra = type=http-response,pattern=^https:\/\/mobile\.flightradar24\.com,requires-body=1,script-path=你的自定义js链接,timeout=30
+# 补充规则（覆盖更多订阅检查接口）
+Flightradar24-Extra = type=http-response,pattern=^https:\/\/(mobile|api)\.flightradar24\.com,requires-body=1,max-size=10240,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/Flightradar24.js,timeout=60
 
 [MITM]
-hostname = %APPEND% mobile.flightradar24.com, *.flightradar24.com, api.flightradar24.com
+hostname = %APPEND% mobile.flightradar24.com, api.flightradar24.com, *.flightradar24.com
