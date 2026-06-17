@@ -1,16 +1,18 @@
 #!name=增强广告阻断 & APP净化
-#!desc=基于blackmatrix7 + 保守增强，避免APP异常
+#!desc=Shadowrocket 通用广告阻断 + 主流APP净化模块（基于MITM）
+#!author=基于 blackmatrix7 & ddgksf 思路
+#!update-url=https://raw.githubusercontent.com/chaoslee514-cell/shadowrocket-config/main/adblock-enhance.sgmodule
 
 [MITM]
-hostname = %APPEND% *.doubleclick.net, *.googlesyndication.com, *.admob.com, *.ads.*
+hostname = %APPEND% *.doubleclick.net, *.googlesyndication.com, *.ads.* 
+
+[URL Rewrite]
+# 通用广告清理示例（保守，避免误杀）
+^https?://.*\.(doubleclick|googlesyndication|admob|adservice)\ .com/ reject
 
 [Script]
-# 可在此添加具体净化脚本
-http-response ^https?://(api|api2|api3)\.((douyin|toutiao|ixigua)\.com|bytedance\.net) script-path=https://raw.githubusercontent.com/deezertidal/shadowrocket-rules/main/scripts/bytedance.js,requires-body=1,max-size=0,timeout=10,tag=抖音净化
+# 示例脚本位置，可替换为活跃模块
+# 如需具体VIP解锁，建议单独添加知名安全模块（使用风险自担）
 
-# 通用广告清理 (示例)
-http-response ^https?://.*(ad|ads|advert|banner|pop|push) script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/Advertising/Advertising.js,requires-body=1,tag=通用广告
-
-[Rule]
-# 模块内规则可补充
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Advertising/Advertising.list,REJECT
+[General]
+# MITM 需单独在 Shadowrocket 设置中开启

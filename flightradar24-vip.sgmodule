@@ -1,0 +1,12 @@
+#!name=Flightradar24 VIP Unlock
+#!desc=Flightradar24 Gold/SVIP 解锁模块 (需开启MITM)
+#!author=基于开源规则
+#!update=2026-06-17
+
+[Script]
+Flightradar24 = type=http-response, pattern=^https://mobile\.flightradar24\.com/mobile/(user-session|subscribe), requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/garywah/Shadowrocket/main/module/Flightradar24.module (参考), timeout=30
+
+# 注意：原脚本可能已失效，建议搜索最新可用JS脚本
+
+[MITM]
+hostname = %APPEND% mobile.flightradar24.com, *.flightradar24.com
